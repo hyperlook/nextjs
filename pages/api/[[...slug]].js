@@ -6,17 +6,19 @@ const CDN_SITE = 'https://google.glook.workers.dev/'
 export default async function handler(req, res) {
 
   let url = new URL(req.url, UP_SITE);
-  let new_request_headers = new Headers(req.headers);
 
-  new_request_headers.set('Host', url.hostname);
-  new_request_headers.set('Referer', url.hostname);
 
-  const pathnames = ['/', '/search','/complete/search']
+  const pathnames = ['/', '/search', '/complete/search', '/translate', '/async/translate']
 
   if (!pathnames.includes(url.pathname)) {
     let sUrl = new URL(req.url, CDN_SITE);
+    res.setHeader('Referer', url.hostname);
+    res.setHeader('user-agent', req.headers['user-agent']);
     res.redirect(sUrl.href);
   } else {
+    let new_request_headers = new Headers(req.headers);
+    new_request_headers.set('Host', url.hostname);
+    new_request_headers.set('Referer', url.hostname);
     try {
       const original_response = await fetch(url.href, {
         method: req.method,
@@ -26,7 +28,7 @@ export default async function handler(req, res) {
 
       //console.log(original_response.headers)
 
-      console.log('当前路径为:' + url.pathname)
+      console.log('path:' + url.pathname)
       console.log('content-type:' + content_type)
       let original_text = await original_response.text();
       res.setHeader('Content-Type', content_type);
