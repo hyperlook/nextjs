@@ -24,7 +24,7 @@ export default async function handler(req, res) {
       res.setHeader('Content-Type', content_type);
       res.setHeader('access-control-allow-origin', '*');
       res.setHeader('access-control-allow-credentials', true);
-      res.send(original_text);
+      res.end(original_text);
     } else {
       let sUrl = new URL(req.url, CDN_SITE);
       res.redirect(sUrl.href);
