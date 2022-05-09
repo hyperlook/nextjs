@@ -12,7 +12,10 @@ export default async function handler(req, res) {
   // console.log(ua)
   try {
 
-    const original_response = await fetch(url.href)
+    const original_response = await fetch(url.href,{
+      method: method,
+      headers: new_request_headers
+  })
     let original_response_clone = original_response.clone();
     let original_text = null;
     let response_headers = original_response.headers;
@@ -29,11 +32,12 @@ export default async function handler(req, res) {
 
     if (content_type.includes('text/html')) {
       original_text = await original_response_clone.text();
-    
+    } else {
+      original_text = '123';
+    }
     res
     .writeHead(200, new_response_headers)
     .end(original_text);
-    }
   } catch (e) {
     console.log(e)
     //console.log(url)

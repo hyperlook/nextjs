@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   async rewrites() {
-    return [{ source: "/search/:path*", destination: "/api/:path*" }];
+    return [{ source: "/:path*", destination: "/api/:path*" }];
   },
 }
 
