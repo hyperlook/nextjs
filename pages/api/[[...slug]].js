@@ -27,7 +27,7 @@ export default async function handler(req, res) {
       //console.log(original_response.headers)
 
       console.log('当前路径为:' + url.pathname)
-      console.log('content-type:' + original_response.headers)
+      console.log('content-type:' + content_type)
       let original_text = await original_response.text();
       res.setHeader('Content-Type', content_type);
       res.setHeader('access-control-allow-origin', '*');
