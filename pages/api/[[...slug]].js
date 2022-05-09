@@ -5,7 +5,10 @@ const up_website = 'https://www.google.com/'
 export default async function handler(req, res) {
   let url = new URL(req.url, up_website);
   let method = req.method;
-  let new_request_headers = new Headers(req.headers);
+  
+  let request_headers = req.headers;
+  let new_request_headers = new Headers(request_headers);
+
   new_request_headers.set('Host', url.hostname);
   new_request_headers.set('Referer', url.hostname);
 
