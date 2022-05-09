@@ -1,5 +1,5 @@
 const UP_SITE = 'https://www.google.com/';
-const CDN_SITE = 'https://google.glook.workers.dev/'
+const CDN_SITE = 'https://cdn.sc21.tk/'
 
 
 
