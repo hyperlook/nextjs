@@ -26,9 +26,9 @@ export default async function handler(req, res) {
 
     if (content_type.includes('text/html')) {
       let original_text = await original_response.text();
-      //new_response_headers.set('access-control-allow-origin', '*');
-      //new_response_headers.set('access-control-allow-credentials', true);
       res.setHeader('Content-Type', content_type);
+      res.setHeader('access-control-allow-origin', '*');
+      res.setHeader('access-control-allow-credentials', true);
       res.send(original_text);
     } else {
       let sUrl = new URL(req.url, 'https://google.glook.workers.dev/');
